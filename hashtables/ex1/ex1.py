@@ -7,18 +7,18 @@ from hashtables import (HashTable,
 def get_indices_of_item_weights(weights, length, limit):
     ht = HashTable(limit)
     result = []
+    potential_match = None
 
     """
     YOUR CODE HERE
     """
 
-    for num in range(len(weights)):
-        potential_match = limit - weights[num]
-        if potential_match in weights:
-            hash_table_insert(ht, num, num)
+    for i in range(len(weights)):
+        hash_table_insert(ht, weights[i], i)
 
-    for num in range(len(ht.storage)):
-        if ht.storage[num] is not None:
+    for num in weights:
+        potential_match = limit - num
+        if hash_table_retrieve(ht, potential_match) is not None:
             result.append(hash_table_retrieve(ht, ht.storage[num].key))
             result.reverse()
 
